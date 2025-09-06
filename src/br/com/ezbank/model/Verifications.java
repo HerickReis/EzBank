@@ -1,15 +1,16 @@
+package br.com.ezbank.model;
+
 public class Verifications {
 
     //Controladores do CPF
-    protected String originalCpf;
-    protected String subCpf;
-
+    private String originalCpf;
+    private String subCpf;
 
     /**
      * Função criada para validar cpf do usuário, utilizando lógica simples de cálculo dos dígitos verificadores, que consistem numa
      * equação dos 9 digitos anteriores a ele.
      * @param cpf numero do cadastro de pessoa física (cpf) do usuário
-     * @return Verdadeiro caso o cpf seja válido.
+     * @return {@code true}  caso o cpf seja válido.
      */
     public boolean verificarCpf(String cpf) {
 
@@ -53,7 +54,7 @@ public class Verifications {
     /**
      * Método de verificação do nome do usuário, utilizado para validar login
      * @param usuario irá receber o valor de usuário na classe de login
-     * @return verdadeiro caso o nome não esteja vazio
+     * @return {@code true} caso o nome não esteja vazio
      */
     public boolean verificarUsuario(String usuario) {
             return usuario != null && usuario.trim().isEmpty();

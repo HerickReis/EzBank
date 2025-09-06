@@ -1,41 +1,75 @@
-public class TransacoesBancarias {
-    double saldoBancario;
+package br.com.ezbank.model;
 
-    public TransacoesBancarias() {}
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class TransacoesBancarias extends Conta{
+
+    private int saques;
+    protected List<Double> totalSaques = new ArrayList<>();
+
+    public TransacoesBancarias() {
+        super();
+    }
 
     /**
      * Método criado para realizar o depósito do saldo do usuário.
      * @param valorDeposito valor a ser depositado.
      * @return o saldo após o depósito ser bem sucedido.
-     * @return Retorna 0 caso haja algum erro no valor inserido.
      */
-    public double relizarDeposito(double valorDeposito){
+    public void realizarDeposito(double valorDeposito){
         if (valorDeposito > 0){
-            this.saldoBancario += valorDeposito;
-            return saldoBancario + valorDeposito;
+            setSaldo(valorDeposito + getSaldo());
         }
-        return 0;
     }
 
     /**
      * Método de saque do dinheiro já depositado.
      * @param valorSaque é o valor a ser sacado pelo usuário.
-     * @return o saldo bancário após o saque ser bem sucedido.
      */
-    public double realizarSaque(double valorSaque){
-        if (valorSaque > 0) {
-            this.saldoBancario -= valorSaque;
-            return saldoBancario;
+    public void realizarSaque(double valorSaque){
+        if (valorSaque > 0 && valorSaque <= getSaldo()) {
+
+            double valorAtualizado = getSaldo() - valorSaque;
+            setSaldo(valorAtualizado);
+            setSaques();
+
+            totalSaques.add(valorSaque);
+        } else System.out.println("Valor inválido");
+    }
+
+    /**
+     * Itera sob uma array que contém informações sobre o valor de todos os saques realizados e os contabilizam.
+     * @return {@code double} Soma de todos os saques realizados
+     */
+    protected double contabilizarSaques(){
+        if (saques > 0){
+            double saquesTotais = 0;
+
+            for (int i = 0; i < totalSaques.size(); i++) {
+                saquesTotais += totalSaques.get(i);
+            }
+
+            return saquesTotais;
 
         }
         return 0;
     }
 
+    public double getSaques() {
+        return saques;
+    }
+
+    public void setSaques() {
+        this.saques += 1;
+    }
+
     /**
-     * Método de retorno do saldo atual do usuário.
-     * @return o valor total em conta.
+     * Obtém o valor total dos saques, vindo da função contabilizarSaques
+     * @return {@code double} valor total sacado
      */
-    public double getSaldoBancario() {
-        return saldoBancario;
+    public double getTotalSaques() {
+        return contabilizarSaques();
     }
 }

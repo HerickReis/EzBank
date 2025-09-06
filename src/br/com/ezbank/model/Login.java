@@ -1,67 +1,72 @@
-import java.util.Scanner;
+package br.com.ezbank.model;
 
-public class Login {
-    String loginUsuario;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public abstract class Login {
+    private String loginUsuario;
     private String loginSenha;
+    private String cpf;
+    private String dataAtual;
 
-    Verifications verification = new Verifications();
-
-    /**
-     * Construtor da classe Login. Atribui um valor padrão caso o nome de usuário seja null.
-     */
-    public Login(){
-        if (!verification.verificarUsuario(this.loginUsuario)){
-            this.loginUsuario = "[ Nenhum usuário cadastrado :( ]";
-        }
+    protected Login(){
     }
 
-    /**
-     * Método de cadastro, utlizado para cadastrar um usuário ao sistema de autenticação da EzBank.
-     * @return verdadeiro caso o cadastro seja um sucesso.
-     */
-    public boolean cadastrar(){
-        Scanner entrada = new Scanner(System.in);
-        Verifications verificar = new Verifications();
+    protected Login(String loginUsuario, String loginSenha, String cpf) {
+        this.loginUsuario = loginUsuario;
+        this.loginSenha = loginSenha;
+        this.cpf = cpf;
+    }
 
-        boolean sucesso = false;
+    protected String getLoginUsuario() {
+        return loginUsuario;
+    }
 
-        do {
-            System.out.println("\nUsuario: ".trim());
-            loginUsuario = entrada.nextLine();
+    protected void setLoginUsuario(String loginUsuario) {
+        this.loginUsuario = loginUsuario;
+    }
 
-            System.out.println("\nCPF: ".trim());
-            String  cpfUsuario = entrada.nextLine();
-            boolean validarCpf = verificar.verificarCpf(cpfUsuario);
+    protected String getLoginSenha() {
+        return loginSenha;
+    }
 
-            if (!validarCpf) {
-                System.out.println("\nCPF invalido");
-                continue;
-            }
+    protected void setLoginSenha(String loginSenha) {
+        this.loginSenha = loginSenha;
+    }
 
-            System.out.println("\nSenha: ".trim());
-            loginSenha = entrada.nextLine();
+    protected String getCpf() {
+        return cpf;
+    }
 
-            System.out.println("Confirme sua senha: ");
-            String confirmaSenha = entrada.nextLine();
+   protected void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-            if (!loginSenha.equals(confirmaSenha)) {
-                System.out.println("\nSenha invalida");
-                continue;
-            }
-            sucesso = true;
-        } while (!sucesso);
+    protected boolean getStatusCpf(String cpf){
+        Verifications verifications = new Verifications();
+        return verifications.verificarCpf(cpf);
+    }
 
-        return sucesso;
+    public String getDataCriacao() {
+        return dataAtual;
+    }
+
+    public void setDataCriacao() {
+        LocalDateTime dataHoraAtual = LocalDateTime.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+        this.dataAtual = dataHoraAtual.format(formato);
     }
 
     /**
      * Método de autenticação, utilizado para relizar o login de um usuário já cadastrado.
      * @param usuario Nome de usuário a ser cadastrado
      * @param senha senha do usuário.
-     * @return Verdadeiro caso a autenticação seja bem sucedida.
+     * @return {@code true} caso a autenticação seja bem sucedida.
      */
-    public boolean autenticar(String usuario, String senha) {
-        return usuario.equals(loginUsuario) && senha.equals(loginSenha);
+   public  boolean autenticar(String usuario, String senha) {
+        return usuario.equals(getLoginUsuario()) && senha.equals(getLoginSenha());
     }
+
+    public abstract String getInformacoes();
 
 }

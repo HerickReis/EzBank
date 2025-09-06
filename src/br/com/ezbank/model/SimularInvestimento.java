@@ -1,12 +1,13 @@
+package br.com.ezbank.model;
+
 import java.util.Scanner;
 
 
-public class SimularInvestimento {
+public class SimularInvestimento{
 
         double valorInicial;
         int tempo;
         double valorSimulado;
-
         double valorFinal;
 
         public SimularInvestimento(double valorInicial, int tempo) {
@@ -57,7 +58,6 @@ public class SimularInvestimento {
 
         if (valorInicial > 0){
 
-            System.out.println(tempo);
             double rendimento = 1 + taxaRendaFixa;
             valorFinal = valorInicial * Math.pow(rendimento, tempo);
 
