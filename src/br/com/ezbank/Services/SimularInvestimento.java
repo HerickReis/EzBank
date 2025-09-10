@@ -1,14 +1,14 @@
-package br.com.ezbank.model;
+package br.com.ezbank.Services;
 
 import java.util.Scanner;
 
 
 public class SimularInvestimento{
 
-        double valorInicial;
-        int tempo;
-        double valorSimulado;
-        double valorFinal;
+        private double valorInicial;
+        private int tempo;
+        private double valorSimulado;
+        private double valorFinal;
 
         public SimularInvestimento(double valorInicial, int tempo) {
             this.valorInicial = valorInicial;

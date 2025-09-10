@@ -1,7 +1,6 @@
-package br.com.ezbank.model;
+package br.com.ezbank.Validations;
 
-public class Verifications {
-
+public class ValidarCpf {
     //Controladores do CPF
     private String originalCpf;
     private String subCpf;
@@ -18,7 +17,7 @@ public class Verifications {
         int segundoDigito;
 
         if (cpf.length() != 11) {
-           return false;
+            return false;
         }
 
         this.originalCpf = cpf;
@@ -48,15 +47,5 @@ public class Verifications {
         int digitoReal2 = Character.getNumericValue(cpf.charAt(10));
 
         return (primeiroDigito == digitoReal1 && segundoDigito == digitoReal2);
-
-        }
-
-    /**
-     * Método de verificação do nome do usuário, utilizado para validar login
-     * @param usuario irá receber o valor de usuário na classe de login
-     * @return {@code true} caso o nome não esteja vazio
-     */
-    public boolean verificarUsuario(String usuario) {
-            return usuario != null && usuario.trim().isEmpty();
-        }
     }
+}

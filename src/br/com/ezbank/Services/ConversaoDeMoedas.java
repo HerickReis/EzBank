@@ -1,4 +1,4 @@
-package br.com.ezbank.model;
+package br.com.ezbank.Services;
 
 import java.util.HashMap;
 import java.util.Scanner;
