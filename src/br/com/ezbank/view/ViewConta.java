@@ -1,8 +1,8 @@
 package br.com.ezbank.view;
 
 import br.com.ezbank.model.Conta;
-import br.com.ezbank.model.ConversaoDeMoedas;
-import br.com.ezbank.model.SimularInvestimento;
+import br.com.ezbank.Services.ConversaoDeMoedas;
+import br.com.ezbank.Services.SimularInvestimento;
 import br.com.ezbank.model.TransacoesBancarias;
 
 import java.util.Scanner;
@@ -38,8 +38,8 @@ public class ViewConta extends Conta {
                 viewConta.executarMenu();
 
                 op = sc.nextInt();
-
                 switch (op) {
+
                     case 1:
                         System.out.println("\nValor a ser depositado: ");
                         double deposito = sc.nextDouble();
@@ -88,6 +88,7 @@ public class ViewConta extends Conta {
                         System.out.printf("O valor incial de R$ %.2f rendendo por %d anos irá render aproximandamente " +
                                 "R$: %.3f e terá o valor final de: R$ %.2f ", valorInicial, tempo, rendimentoBruto, valorDoRendimento);
 
+                        break;
                 }
 
             } while (op != 0);

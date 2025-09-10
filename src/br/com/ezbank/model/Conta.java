@@ -1,9 +1,9 @@
 package br.com.ezbank.model;
 
+import br.com.ezbank.Validations.ValidarCpf;
+
 public class Conta extends Login{
     public double saldo;
-    private double totalInvestido;
-    private double moedasEstrangeiras;
 
     public Conta() {
         super();
@@ -22,8 +22,8 @@ public class Conta extends Login{
     }
 
     public boolean getStatusCpf() {
-        Verifications v = new Verifications();
-        return  v.verificarCpf(getCpf());
+        ValidarCpf validarCpf = new ValidarCpf();
+        return  validarCpf.verificarCpf(getCpf());
 
     }
 

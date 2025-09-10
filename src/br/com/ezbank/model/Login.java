@@ -1,5 +1,7 @@
 package br.com.ezbank.model;
 
+import br.com.ezbank.Validations.ValidarCpf;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +20,7 @@ public abstract class Login {
         this.cpf = cpf;
     }
 
-    protected String getLoginUsuario() {
+    public String getLoginUsuario() {
         return loginUsuario;
     }
 
@@ -43,8 +45,8 @@ public abstract class Login {
     }
 
     protected boolean getStatusCpf(String cpf){
-        Verifications verifications = new Verifications();
-        return verifications.verificarCpf(cpf);
+        ValidarCpf validarCpf = new ValidarCpf();
+        return validarCpf.verificarCpf(cpf);
     }
 
     public String getDataCriacao() {
@@ -53,7 +55,7 @@ public abstract class Login {
 
     public void setDataCriacao() {
         LocalDateTime dataHoraAtual = LocalDateTime.now();
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss");
         this.dataAtual = dataHoraAtual.format(formato);
     }
 
@@ -67,6 +69,8 @@ public abstract class Login {
         return usuario.equals(getLoginUsuario()) && senha.equals(getLoginSenha());
     }
 
-    public abstract String getInformacoes();
+    public String getInformacoes() {
+        return null;
+    }
 
 }

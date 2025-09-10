@@ -11,10 +11,6 @@ public class ViewLogin extends Login {
         super();
     }
 
-//    public ViewLogin(String usuario, String senha,  String cpf) {
-//        super(usuario, senha, cpf);
-//    }
-
     @Override
     public String getInformacoes() {
         return "Nome: " + getLoginUsuario() +
